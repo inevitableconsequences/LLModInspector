@@ -40,11 +40,6 @@ namespace LLModInspector
             RefreshListOfMods();
         }
 
-        private void btn_refreshModsList_Click(object sender, EventArgs e)
-        {
-            RefreshListOfMods();
-        }
-
         private void RefreshListOfMods()
         {
             modsListBox.Items.Clear();
@@ -68,7 +63,6 @@ namespace LLModInspector
             BeginInvoke((MethodInvoker)delegate
             {
                 string itemName = modsListBox.Items[e.Index].ToString();
-
                 if (e.NewValue == CheckState.Checked)
                 {
                     if (Path.GetExtension(itemName) == ".deactivated")
@@ -85,17 +79,12 @@ namespace LLModInspector
         private void ChangeFileExtension(string fileNameWithoutExtension, string newExtension)
         {
             string oldFilePath = Path.Combine(_modsPath, fileNameWithoutExtension);
-
             string newFilePathWithExtension = Path.ChangeExtension(oldFilePath, newExtension.TrimStart('.'));
-
-            MessageBox.Show($"Trying to change extension:\n{oldFilePath}\nTo =>: {newFilePathWithExtension}");
-
             if (File.Exists(oldFilePath))
             {
                 try
                 {
                     File.Move(oldFilePath, newFilePathWithExtension);
-                    MessageBox.Show($"Extension successfully changed: {oldFilePath} => {newFilePathWithExtension}");
                     RefreshListOfMods();
                 }
                 catch (Exception ex)
@@ -106,6 +95,5 @@ namespace LLModInspector
             else
                 MessageBox.Show($"File {oldFilePath} not found.");
         }
-
     }
 }

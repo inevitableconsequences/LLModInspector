@@ -30,7 +30,6 @@
         {
             btnPanel = new Panel();
             btn_info = new Button();
-            btn_refreshModsList = new Button();
             btn_getModsPath = new Button();
             logoPanel = new Panel();
             movePanel = new Panel();
@@ -45,7 +44,6 @@
             // btnPanel
             // 
             btnPanel.Controls.Add(btn_info);
-            btnPanel.Controls.Add(btn_refreshModsList);
             btnPanel.Controls.Add(btn_getModsPath);
             btnPanel.Controls.Add(logoPanel);
             btnPanel.Dock = DockStyle.Left;
@@ -62,29 +60,13 @@
             btn_info.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
             btn_info.FlatStyle = FlatStyle.Flat;
             btn_info.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btn_info.Location = new Point(0, 220);
+            btn_info.Location = new Point(0, 160);
             btn_info.Name = "btn_info";
             btn_info.Size = new Size(200, 60);
             btn_info.TabIndex = 3;
             btn_info.Text = "Info";
             btn_info.UseVisualStyleBackColor = true;
             btn_info.Click += btn_info_Click;
-            // 
-            // btn_refreshModsList
-            // 
-            btn_refreshModsList.Dock = DockStyle.Top;
-            btn_refreshModsList.FlatAppearance.BorderSize = 0;
-            btn_refreshModsList.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
-            btn_refreshModsList.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
-            btn_refreshModsList.FlatStyle = FlatStyle.Flat;
-            btn_refreshModsList.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btn_refreshModsList.Location = new Point(0, 160);
-            btn_refreshModsList.Name = "btn_refreshModsList";
-            btn_refreshModsList.Size = new Size(200, 60);
-            btn_refreshModsList.TabIndex = 2;
-            btn_refreshModsList.Text = "Refresh";
-            btn_refreshModsList.UseVisualStyleBackColor = true;
-            btn_refreshModsList.Click += btn_refreshModsList_Click;
             // 
             // btn_getModsPath
             // 
@@ -206,7 +188,6 @@
         private Button btn_minimize;
         private Button btn_close;
         private Button btn_info;
-        private Button btn_refreshModsList;
         private Label label1;
         private CheckedListBox modsListBox;
     }
