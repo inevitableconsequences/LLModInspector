@@ -104,7 +104,7 @@ namespace LLModInspector
                 }
             }
             else
-                MessageBox.Show($"Файл {oldFilePath} не найден.");
+                MessageBox.Show($"File {oldFilePath} not found.");
         }
 
     }
