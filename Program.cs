@@ -1,4 +1,4 @@
-namespace ModInspector_for_Legacy_Launcher
+namespace LLModInspector
 {
     internal static class Program
     {

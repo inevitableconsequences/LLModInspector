@@ -1,4 +1,4 @@
-﻿namespace ModInspector_for_Legacy_Launcher
+﻿namespace LLModInspector
 {
     partial class MainForm
     {
@@ -29,18 +29,24 @@
         private void InitializeComponent()
         {
             btnPanel = new Panel();
-            button1 = new Button();
+            btn_info = new Button();
+            btn_refreshModsList = new Button();
+            btn_getModsPath = new Button();
             logoPanel = new Panel();
             movePanel = new Panel();
-            minimizeButton = new Button();
-            closeButton = new Button();
+            btn_minimize = new Button();
+            btn_close = new Button();
+            label1 = new Label();
+            modsListBox = new CheckedListBox();
             btnPanel.SuspendLayout();
             movePanel.SuspendLayout();
             SuspendLayout();
             // 
             // btnPanel
             // 
-            btnPanel.Controls.Add(button1);
+            btnPanel.Controls.Add(btn_info);
+            btnPanel.Controls.Add(btn_refreshModsList);
+            btnPanel.Controls.Add(btn_getModsPath);
             btnPanel.Controls.Add(logoPanel);
             btnPanel.Dock = DockStyle.Left;
             btnPanel.Location = new Point(0, 0);
@@ -48,19 +54,53 @@
             btnPanel.Size = new Size(200, 450);
             btnPanel.TabIndex = 0;
             // 
-            // button1
+            // btn_info
             // 
-            button1.Dock = DockStyle.Top;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(0, 100);
-            button1.Name = "button1";
-            button1.Size = new Size(200, 60);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btn_info.Dock = DockStyle.Top;
+            btn_info.FlatAppearance.BorderSize = 0;
+            btn_info.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
+            btn_info.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
+            btn_info.FlatStyle = FlatStyle.Flat;
+            btn_info.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_info.Location = new Point(0, 220);
+            btn_info.Name = "btn_info";
+            btn_info.Size = new Size(200, 60);
+            btn_info.TabIndex = 3;
+            btn_info.Text = "Info";
+            btn_info.UseVisualStyleBackColor = true;
+            btn_info.Click += btn_info_Click;
+            // 
+            // btn_refreshModsList
+            // 
+            btn_refreshModsList.Dock = DockStyle.Top;
+            btn_refreshModsList.FlatAppearance.BorderSize = 0;
+            btn_refreshModsList.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
+            btn_refreshModsList.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
+            btn_refreshModsList.FlatStyle = FlatStyle.Flat;
+            btn_refreshModsList.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_refreshModsList.Location = new Point(0, 160);
+            btn_refreshModsList.Name = "btn_refreshModsList";
+            btn_refreshModsList.Size = new Size(200, 60);
+            btn_refreshModsList.TabIndex = 2;
+            btn_refreshModsList.Text = "Refresh";
+            btn_refreshModsList.UseVisualStyleBackColor = true;
+            btn_refreshModsList.Click += btn_refreshModsList_Click;
+            // 
+            // btn_getModsPath
+            // 
+            btn_getModsPath.Dock = DockStyle.Top;
+            btn_getModsPath.FlatAppearance.BorderSize = 0;
+            btn_getModsPath.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
+            btn_getModsPath.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
+            btn_getModsPath.FlatStyle = FlatStyle.Flat;
+            btn_getModsPath.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_getModsPath.Location = new Point(0, 100);
+            btn_getModsPath.Name = "btn_getModsPath";
+            btn_getModsPath.Size = new Size(200, 60);
+            btn_getModsPath.TabIndex = 1;
+            btn_getModsPath.Text = "Set Mods Folder";
+            btn_getModsPath.UseVisualStyleBackColor = true;
+            btn_getModsPath.Click += btn_getModsPath_Click;
             // 
             // logoPanel
             // 
@@ -73,8 +113,8 @@
             // movePanel
             // 
             movePanel.BackColor = SystemColors.ControlDark;
-            movePanel.Controls.Add(minimizeButton);
-            movePanel.Controls.Add(closeButton);
+            movePanel.Controls.Add(btn_minimize);
+            movePanel.Controls.Add(btn_close);
             movePanel.Dock = DockStyle.Top;
             movePanel.Location = new Point(200, 0);
             movePanel.Name = "movePanel";
@@ -83,45 +123,69 @@
             movePanel.MouseDown += movePanel_MouseDown;
             movePanel.MouseMove += movePanel_MouseMove;
             // 
-            // minimizeButton
+            // btn_minimize
             // 
-            minimizeButton.BackColor = SystemColors.ControlDarkDark;
-            minimizeButton.Dock = DockStyle.Right;
-            minimizeButton.FlatAppearance.BorderSize = 0;
-            minimizeButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 192, 255);
-            minimizeButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            minimizeButton.FlatStyle = FlatStyle.Flat;
-            minimizeButton.Font = new Font("Segoe UI", 40F);
-            minimizeButton.Location = new Point(400, 0);
-            minimizeButton.Name = "minimizeButton";
-            minimizeButton.Size = new Size(100, 100);
-            minimizeButton.TabIndex = 1;
-            minimizeButton.Text = "-";
-            minimizeButton.UseVisualStyleBackColor = false;
-            minimizeButton.Click += minimizeButton_Click;
+            btn_minimize.BackColor = SystemColors.ControlDarkDark;
+            btn_minimize.Dock = DockStyle.Right;
+            btn_minimize.FlatAppearance.BorderSize = 0;
+            btn_minimize.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 192, 255);
+            btn_minimize.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btn_minimize.FlatStyle = FlatStyle.Flat;
+            btn_minimize.Font = new Font("Segoe UI", 40F);
+            btn_minimize.Location = new Point(400, 0);
+            btn_minimize.Name = "btn_minimize";
+            btn_minimize.Size = new Size(100, 100);
+            btn_minimize.TabIndex = 1;
+            btn_minimize.Text = "-";
+            btn_minimize.UseVisualStyleBackColor = false;
+            btn_minimize.Click += minimizeButton_Click;
             // 
-            // closeButton
+            // btn_close
             // 
-            closeButton.BackColor = SystemColors.ControlDarkDark;
-            closeButton.Dock = DockStyle.Right;
-            closeButton.FlatAppearance.BorderSize = 0;
-            closeButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 192, 255);
-            closeButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            closeButton.FlatStyle = FlatStyle.Flat;
-            closeButton.Font = new Font("Segoe UI", 40F);
-            closeButton.Location = new Point(500, 0);
-            closeButton.Name = "closeButton";
-            closeButton.Size = new Size(100, 100);
-            closeButton.TabIndex = 0;
-            closeButton.Text = "X";
-            closeButton.UseVisualStyleBackColor = false;
-            closeButton.Click += closeButton_Click;
+            btn_close.BackColor = SystemColors.ControlDarkDark;
+            btn_close.Dock = DockStyle.Right;
+            btn_close.FlatAppearance.BorderSize = 0;
+            btn_close.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 192, 255);
+            btn_close.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btn_close.FlatStyle = FlatStyle.Flat;
+            btn_close.Font = new Font("Segoe UI", 40F);
+            btn_close.Location = new Point(500, 0);
+            btn_close.Name = "btn_close";
+            btn_close.Size = new Size(100, 100);
+            btn_close.TabIndex = 0;
+            btn_close.Text = "X";
+            btn_close.UseVisualStyleBackColor = false;
+            btn_close.Click += closeButton_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Rounded MT Bold", 14.25F);
+            label1.Location = new Point(416, 119);
+            label1.Name = "label1";
+            label1.Size = new Size(173, 22);
+            label1.TabIndex = 3;
+            label1.Text = "Current mods list:";
+            // 
+            // modsListBox
+            // 
+            modsListBox.BorderStyle = BorderStyle.None;
+            modsListBox.CheckOnClick = true;
+            modsListBox.FormattingEnabled = true;
+            modsListBox.HorizontalScrollbar = true;
+            modsListBox.Location = new Point(200, 150);
+            modsListBox.Name = "modsListBox";
+            modsListBox.Size = new Size(600, 288);
+            modsListBox.TabIndex = 4;
+            modsListBox.ItemCheck += modsListBox_ItemCheck;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(modsListBox);
+            Controls.Add(label1);
             Controls.Add(movePanel);
             Controls.Add(btnPanel);
             FormBorderStyle = FormBorderStyle.None;
@@ -130,15 +194,20 @@
             btnPanel.ResumeLayout(false);
             movePanel.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Panel btnPanel;
-        private Button button1;
+        private Button btn_getModsPath;
         private Panel logoPanel;
         private Panel movePanel;
-        private Button minimizeButton;
-        private Button closeButton;
+        private Button btn_minimize;
+        private Button btn_close;
+        private Button btn_info;
+        private Button btn_refreshModsList;
+        private Label label1;
+        private CheckedListBox modsListBox;
     }
 }
