@@ -1,16 +1,24 @@
+using System.Text.Json;
+
 namespace LLModInspector
 {
     public partial class MainForm : Form
     {
         private Point _formPos;
 
-        private string? _modsPath;
+        private static string? _modsPath;
 
         private string[]? _modsList;
 
         private string? _folderDialogResult;
 
-        public MainForm() => InitializeComponent();
+        private static string? _filePath = "setting.json";
+
+        public MainForm()
+        {
+            InitializeComponent();
+            //LoadState();
+        }
 
         private void closeButton_Click(object sender, EventArgs e) => Environment.Exit(0);
 
@@ -19,6 +27,34 @@ namespace LLModInspector
         private void movePanel_MouseDown(object sender, MouseEventArgs e) => _formPos = new Point(e.X, e.Y);
 
         private void btn_info_Click(object sender, EventArgs e) => MessageBox.Show("Developed by The Stars Above© \nDeveloper's Github: \n https://github.com/inevitableconsequences");
+
+        //static void SaveState(string path)
+        //{
+        //    if (File.Exists(_filePath))
+        //    {
+        //        string jsonString = JsonSerializer.Serialize(path);
+        //        using (var writer = new StreamWriter(_filePath))
+        //        {
+        //            writer.Write(jsonString);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        File.Create(_filePath);
+        //    }
+            
+        //}
+
+        //static string LoadState()
+        //{
+        //    // Проверка существования файла
+        //    if (File.Exists(_filePath))
+        //    {
+        //        var jsonString = File.ReadAllText(_filePath);
+        //        return JsonSerializer.Deserialize<string>(jsonString);
+        //    }            
+        //    return "Something went wrong";
+        //}
 
         private void movePanel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -32,8 +68,11 @@ namespace LLModInspector
         {
             FolderBrowserDialog dialog = new();
             _folderDialogResult = dialog.ShowDialog().ToString();
-            if (_folderDialogResult == "OK")            
+            if (_folderDialogResult == "OK")
+            {
                 btn_getModsPath.BackColor = Color.Green;
+                //SaveState(_modsPath);
+            }
             else
                 btn_getModsPath.BackColor = SystemColors.Control;
             _modsPath = dialog.SelectedPath;

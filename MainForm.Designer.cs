@@ -36,7 +36,7 @@
             btn_minimize = new Button();
             btn_close = new Button();
             label1 = new Label();
-            modsListBox = new CheckedListBox();
+            modsListBox = new ListBox();
             btnPanel.SuspendLayout();
             movePanel.SuspendLayout();
             SuspendLayout();
@@ -152,14 +152,15 @@
             // modsListBox
             // 
             modsListBox.BorderStyle = BorderStyle.None;
-            modsListBox.CheckOnClick = true;
+            modsListBox.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             modsListBox.FormattingEnabled = true;
             modsListBox.HorizontalScrollbar = true;
-            modsListBox.Location = new Point(200, 150);
+            modsListBox.ItemHeight = 18;
+            modsListBox.Location = new Point(200, 144);
             modsListBox.Name = "modsListBox";
+            modsListBox.SelectionMode = SelectionMode.MultiSimple;
             modsListBox.Size = new Size(600, 288);
             modsListBox.TabIndex = 4;
-            modsListBox.ItemCheck += modsListBox_ItemCheck;
             // 
             // MainForm
             // 
@@ -189,6 +190,6 @@
         private Button btn_close;
         private Button btn_info;
         private Label label1;
-        private CheckedListBox modsListBox;
+        private ListBox modsListBox;
     }
 }
