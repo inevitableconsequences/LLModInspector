@@ -1,4 +1,5 @@
 using System.Text.Json;
+using static System.Windows.Forms.AxHost;
 
 namespace LLModInspector
 {
@@ -12,13 +13,7 @@ namespace LLModInspector
 
         private string? _folderDialogResult;
 
-        private static string? _filePath = "setting.json";
-
-        public MainForm()
-        {
-            InitializeComponent();
-            //LoadState();
-        }
+        public MainForm() => InitializeComponent();
 
         private void closeButton_Click(object sender, EventArgs e) => Environment.Exit(0);
 
@@ -26,35 +21,11 @@ namespace LLModInspector
 
         private void movePanel_MouseDown(object sender, MouseEventArgs e) => _formPos = new Point(e.X, e.Y);
 
-        private void btn_info_Click(object sender, EventArgs e) => MessageBox.Show("Developed by The Stars Above© \nDeveloper's Github: \n https://github.com/inevitableconsequences");
-
-        //static void SaveState(string path)
-        //{
-        //    if (File.Exists(_filePath))
-        //    {
-        //        string jsonString = JsonSerializer.Serialize(path);
-        //        using (var writer = new StreamWriter(_filePath))
-        //        {
-        //            writer.Write(jsonString);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        File.Create(_filePath);
-        //    }
-            
-        //}
-
-        //static string LoadState()
-        //{
-        //    // Проверка существования файла
-        //    if (File.Exists(_filePath))
-        //    {
-        //        var jsonString = File.ReadAllText(_filePath);
-        //        return JsonSerializer.Deserialize<string>(jsonString);
-        //    }            
-        //    return "Something went wrong";
-        //}
+        private void btn_info_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Developed by The Stars Above© \nDeveloper's Github: \n https://github.com/inevitableconsequences");
+            MessageBox.Show("First, select the folder with mods, then from the list that appears, select the mods that you want to enable or disable, then click the button to change the state of the mod");
+        }
 
         private void movePanel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -71,7 +42,6 @@ namespace LLModInspector
             if (_folderDialogResult == "OK")
             {
                 btn_getModsPath.BackColor = Color.Green;
-                //SaveState(_modsPath);
             }
             else
                 btn_getModsPath.BackColor = SystemColors.Control;
@@ -97,24 +67,6 @@ namespace LLModInspector
             }
         }
 
-        private void modsListBox_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            BeginInvoke((MethodInvoker)delegate
-            {
-                string itemName = modsListBox.Items[e.Index].ToString();
-                if (e.NewValue == CheckState.Checked)
-                {
-                    if (Path.GetExtension(itemName) == ".deactivated")
-                        ChangeFileExtension(itemName, ".jar");
-                }
-                else
-                {
-                    if (Path.GetExtension(itemName) == ".jar")
-                        ChangeFileExtension(itemName, ".deactivated");
-                }
-            });
-        }
-
         private void ChangeFileExtension(string fileNameWithoutExtension, string newExtension)
         {
             string oldFilePath = Path.Combine(_modsPath, fileNameWithoutExtension);
@@ -133,6 +85,18 @@ namespace LLModInspector
             }
             else
                 MessageBox.Show($"File {oldFilePath} not found.");
+        }
+
+        private void btn_changeExtension_Click(object sender, EventArgs e)
+        {
+            var selectedItems = modsListBox.SelectedItems.Cast<string>().ToList();
+            foreach (string item in selectedItems)
+            {
+                if (Path.GetExtension(item) == ".deactivated")
+                    ChangeFileExtension(item, ".jar");
+                else if (Path.GetExtension(item) == ".jar")
+                    ChangeFileExtension(item, ".deactivated");
+            }
         }
     }
 }

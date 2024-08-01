@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             btnPanel = new Panel();
+            btn_changeExtension = new Button();
             btn_info = new Button();
             btn_getModsPath = new Button();
             logoPanel = new Panel();
@@ -43,6 +44,7 @@
             // 
             // btnPanel
             // 
+            btnPanel.Controls.Add(btn_changeExtension);
             btnPanel.Controls.Add(btn_info);
             btnPanel.Controls.Add(btn_getModsPath);
             btnPanel.Controls.Add(logoPanel);
@@ -51,6 +53,23 @@
             btnPanel.Name = "btnPanel";
             btnPanel.Size = new Size(200, 450);
             btnPanel.TabIndex = 0;
+            // 
+            // btn_changeExtension
+            // 
+            btn_changeExtension.BackColor = SystemColors.ActiveCaption;
+            btn_changeExtension.Dock = DockStyle.Bottom;
+            btn_changeExtension.FlatAppearance.BorderSize = 0;
+            btn_changeExtension.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
+            btn_changeExtension.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
+            btn_changeExtension.FlatStyle = FlatStyle.Flat;
+            btn_changeExtension.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_changeExtension.Location = new Point(0, 390);
+            btn_changeExtension.Name = "btn_changeExtension";
+            btn_changeExtension.Size = new Size(200, 60);
+            btn_changeExtension.TabIndex = 4;
+            btn_changeExtension.Text = "Switch mod state";
+            btn_changeExtension.UseVisualStyleBackColor = false;
+            btn_changeExtension.Click += btn_changeExtension_Click;
             // 
             // btn_info
             // 
@@ -191,5 +210,6 @@
         private Button btn_info;
         private Label label1;
         private ListBox modsListBox;
+        private Button btn_changeExtension;
     }
 }
