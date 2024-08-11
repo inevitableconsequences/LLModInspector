@@ -101,10 +101,17 @@ namespace LLModInspector
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            string search = searchTextBox.Text.ToLower();
-            _filteredMods = _modsList.Where(item => Path.GetFileName(item).ToLower().Contains(search)).Select(item => Path.GetFileName(item)).ToArray();
-            modsListBox.Items.Clear();
-            modsListBox.Items.AddRange(_filteredMods);
+            try
+            {
+                string search = searchTextBox.Text.ToLower();
+                _filteredMods = _modsList.Where(item => Path.GetFileName(item).ToLower().Contains(search)).Select(item => Path.GetFileName(item)).ToArray();
+                modsListBox.Items.Clear();
+                modsListBox.Items.AddRange(_filteredMods);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("First you need choose folder");
+            }
         }
 
         private void selectAllLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
