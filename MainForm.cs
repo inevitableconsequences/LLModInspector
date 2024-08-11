@@ -11,6 +11,8 @@ namespace LLModInspector
 
         private string[]? _modsList;
 
+        private string[]? _filteredMods;
+
         private string? _folderDialogResult;
 
         public MainForm() => InitializeComponent();
@@ -23,7 +25,7 @@ namespace LLModInspector
 
         private void btn_info_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Developed by The Stars Above© \nDeveloper's Github: \n https://github.com/inevitableconsequences");
+            MessageBox.Show("Developed by The Stars Aboveï¿½ \nDeveloper's Github: \n https://github.com/inevitableconsequences");
             MessageBox.Show("First, select the folder with mods, then from the list that appears, select the mods that you want to enable or disable, then click the button to change the state of the mod");
         }
 
@@ -40,9 +42,7 @@ namespace LLModInspector
             FolderBrowserDialog dialog = new();
             _folderDialogResult = dialog.ShowDialog().ToString();
             if (_folderDialogResult == "OK")
-            {
                 btn_getModsPath.BackColor = Color.Green;
-            }
             else
                 btn_getModsPath.BackColor = SystemColors.Control;
             _modsPath = dialog.SelectedPath;
@@ -97,6 +97,20 @@ namespace LLModInspector
                 else if (Path.GetExtension(item) == ".jar")
                     ChangeFileExtension(item, ".deactivated");
             }
+        }
+
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string search = searchTextBox.Text.ToLower();
+            _filteredMods = _modsList.Where(item => Path.GetFileName(item).ToLower().Contains(search)).Select(item => Path.GetFileName(item)).ToArray();
+            modsListBox.Items.Clear();
+            modsListBox.Items.AddRange(_filteredMods);
+        }
+
+        private void selectAllLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            for (int i = 0; i < modsListBox.Items.Count; i++)
+                modsListBox.SetSelected(i, true);
         }
     }
 }

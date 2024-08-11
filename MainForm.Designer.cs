@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             btnPanel = new Panel();
+            selectAllLink = new LinkLabel();
             btn_changeExtension = new Button();
             btn_info = new Button();
             btn_getModsPath = new Button();
@@ -38,12 +39,14 @@
             btn_close = new Button();
             label1 = new Label();
             modsListBox = new ListBox();
+            searchTextBox = new TextBox();
             btnPanel.SuspendLayout();
             movePanel.SuspendLayout();
             SuspendLayout();
             // 
             // btnPanel
             // 
+            btnPanel.Controls.Add(selectAllLink);
             btnPanel.Controls.Add(btn_changeExtension);
             btnPanel.Controls.Add(btn_info);
             btnPanel.Controls.Add(btn_getModsPath);
@@ -53,6 +56,18 @@
             btnPanel.Name = "btnPanel";
             btnPanel.Size = new Size(200, 450);
             btnPanel.TabIndex = 0;
+            // 
+            // selectAllLink
+            // 
+            selectAllLink.AutoSize = true;
+            selectAllLink.BorderStyle = BorderStyle.FixedSingle;
+            selectAllLink.Location = new Point(72, 343);
+            selectAllLink.Name = "selectAllLink";
+            selectAllLink.Size = new Size(57, 17);
+            selectAllLink.TabIndex = 5;
+            selectAllLink.TabStop = true;
+            selectAllLink.Text = "Select All";
+            selectAllLink.LinkClicked += selectAllLink_LinkClicked;
             // 
             // btn_changeExtension
             // 
@@ -162,7 +177,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Arial Rounded MT Bold", 14.25F);
-            label1.Location = new Point(416, 119);
+            label1.Location = new Point(206, 112);
             label1.Name = "label1";
             label1.Size = new Size(173, 22);
             label1.TabIndex = 3;
@@ -181,11 +196,24 @@
             modsListBox.Size = new Size(600, 288);
             modsListBox.TabIndex = 4;
             // 
+            // searchTextBox
+            // 
+            searchTextBox.CharacterCasing = CharacterCasing.Upper;
+            searchTextBox.Font = new Font("Segoe UI Black", 9F);
+            searchTextBox.Location = new Point(399, 110);
+            searchTextBox.Name = "searchTextBox";
+            searchTextBox.PlaceholderText = "SEARCH";
+            searchTextBox.Size = new Size(389, 24);
+            searchTextBox.TabIndex = 5;
+            searchTextBox.TextAlign = HorizontalAlignment.Center;
+            searchTextBox.TextChanged += searchTextBox_TextChanged;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(searchTextBox);
             Controls.Add(modsListBox);
             Controls.Add(label1);
             Controls.Add(movePanel);
@@ -194,6 +222,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             btnPanel.ResumeLayout(false);
+            btnPanel.PerformLayout();
             movePanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -211,5 +240,7 @@
         private Label label1;
         private ListBox modsListBox;
         private Button btn_changeExtension;
+        private TextBox searchTextBox;
+        private LinkLabel selectAllLink;
     }
 }
