@@ -110,8 +110,9 @@ namespace LLModInspector
             }
             catch (Exception)
             {
-                MessageBox.Show("First you need choose folder");
+                searchTextBox.Clear();
             }
+                
         }
 
         private void selectAllLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
