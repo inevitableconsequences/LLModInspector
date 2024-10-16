@@ -1,6 +1,3 @@
-using System.Text.Json;
-using static System.Windows.Forms.AxHost;
-
 namespace LLModInspector
 {
     public partial class MainForm : Form
@@ -23,11 +20,7 @@ namespace LLModInspector
 
         private void movePanel_MouseDown(object sender, MouseEventArgs e) => _formPos = new Point(e.X, e.Y);
 
-        private void btn_info_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Developed by The Stars Above� \nDeveloper's Github: \n https://github.com/inevitableconsequences");
-            MessageBox.Show("First, select the folder with mods, then from the list that appears, select the mods that you want to enable or disable, then click the button to change the state of the mod");
-        }
+        private void btn_info_Click(object sender, EventArgs e) => MessageBox.Show("First, select the folder with mods, then from the list that appears, select the mods that you want to enable or disable, then click the button to change the state of the mod");
 
         private void movePanel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -46,6 +39,7 @@ namespace LLModInspector
             else
                 btn_getModsPath.BackColor = SystemColors.Control;
             _modsPath = dialog.SelectedPath;
+            using (StreamWriter stream = new("path.txt")) stream.WriteLine(dialog.SelectedPath);
             RefreshListOfMods();
         }
 
@@ -63,7 +57,7 @@ namespace LLModInspector
             }
             catch (Exception)
             {
-                MessageBox.Show("Folder isn't choosed or something went wrong");
+                MessageBox.Show("Folder isn't choosed or something went wrong (you probably can see this message at first time this program starts)");
             }
         }
 
@@ -112,13 +106,23 @@ namespace LLModInspector
             {
                 searchTextBox.Clear();
             }
-                
         }
 
         private void selectAllLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             for (int i = 0; i < modsListBox.Items.Count; i++)
                 modsListBox.SetSelected(i, true);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            if (File.Exists("path.txt"))
+            {
+                using (StreamReader stream = new("path.txt")) _modsPath = stream.ReadLine();
+                RefreshListOfMods();
+            }
+            else
+                using (FileStream fs = new("path.txt", FileMode.Create)) MessageBox.Show("File with mods path is created");
         }
     }
 }

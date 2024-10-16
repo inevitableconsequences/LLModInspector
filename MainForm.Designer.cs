@@ -221,6 +221,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += MainForm_Load;
             btnPanel.ResumeLayout(false);
             btnPanel.PerformLayout();
             movePanel.ResumeLayout(false);
